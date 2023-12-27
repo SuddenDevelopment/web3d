@@ -57,7 +57,7 @@ export default function Home() {
                         <h3>My Web3D Assets</h3>
                     </Col>
                     <Col span={12} style={{textAlign:'right'}}>
-                        { process.env.NODE_ENV !== 'development' &&
+                        { process.env.NODE_ENV === 'development' &&
                             <Button onClick={() => setModalView('new')}>Upload New Model + Create Page</Button> 
                         }
                         
