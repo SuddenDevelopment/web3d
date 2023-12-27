@@ -1,3 +1,12 @@
 {
-    "pages": []
+    "pages": [
+        {
+            "id": "9e216384-ab7d-4034-a5a6-15f02d1002b5",
+            "name": "test",
+            "template": "stage",
+            "glb": "untitled.glb",
+            "thumbnail": "r3f_test.png",
+            "date": "2023-12-27T02:58:05.556Z"
+        }
+    ]
 }
