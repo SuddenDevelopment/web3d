@@ -76,8 +76,12 @@ export default function Home() {
                         <b>Description:</b> {objPage.description}<br />
                         <Space>
                             <a href={`r3f_${objPage.name}`}><LinkOutlined /></a>
+                            { process.env.NODE_ENV === 'development' &&
+                            <>
                             <FileImageOutlined onClick={() => {setCurrentPage(objPage.id); setModalView('thumbnail')}} />
                             <DeleteOutlined onClick={() => {setCurrentPage(objPage.id); setModalView('delete')}} />
+                            </>
+                            }
                         </Space>
                     </Card>
                 </List.Item>
