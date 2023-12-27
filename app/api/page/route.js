@@ -1,18 +1,41 @@
 import fs from 'fs';
 import path from 'path';
+//delete the page, model, thumbnail and data
 
-export async function GET(req) {    
-    if(process.env.NODE_ENV !== 'development') {
-        return Response('This is only for local development');
-    }
-    const arrDirFiles = fs.readdirSync(path.resolve('./pages/'));
-    // we only want to list the pages that were generated with a r3f prefix
-    const arrFiles = arrDirFiles.filter(file => path.extname(file) === ".js" && file.indexOf('r3f_') === 0);
-    const arrRenamedFiles = arrFiles.map(file => {
-        // Update the file name here
-        const updatedName = file.replace('r3f_', '').replace('.js', '');
-        return updatedName;
+const deleteFiles = (arrFiles) => {
+    arrFiles.forEach(strFile => {
+        if (fs.existsSync(strFile)) {
+            fs.unlinkSync(strFile);
+        }
     });
-    return Response.json(arrRenamedFiles);
-}
+};
 
+export async function DELETE(req) {
+    if(process.env.NODE_ENV !== 'development') {
+        return new Response('This is only for local development');
+    }
+    const arrFiles = [];
+    //get the regular request body params
+    const objParams = await req.json();
+    //console.log('DELETE PARAMS', objParams);
+    //find the record in data.json
+    const strDataFile = path.resolve('./public/data.json');
+    const strData = fs.readFileSync(strDataFile, 'utf8');
+    const objData = JSON.parse(strData);
+    let objPage = objData.pages.find(obj => obj.id === objParams.page);
+    //delete the page file
+    arrFiles.push( path.resolve('./pages/r3f_'+objPage.name+'.js') );
+    //delete the scene file
+    arrFiles.push( path.resolve('./models/r3f_'+objPage.name+'.js') );
+    //delete the model files
+    const strExtension = objPage.glb.split('.').pop();
+    arrFiles.push( path.resolve('./public/models/r3f_'+objPage.name+'.'+strExtension) );
+    arrFiles.push( path.resolve('./public/models/r3f_'+objPage.name+'-transformed.'+strExtension) );
+    //delete the thumbnail file
+    arrFiles.push( path.resolve('./public/thumbnails/'+objPage.thumbnail) );
+    //delete the data.json record
+    objData.pages = objData.pages.filter(obj => obj.id !== objParams.page);
+    fs.writeFileSync(strDataFile, JSON.stringify(objData, null, 4));
+    deleteFiles(arrFiles);
+    return new Response('deleted');
+}

@@ -95,6 +95,22 @@ export async function POST(req) {
                 createPage(strFilename, path.join(path.resolve('./pages/'), strFilename), objParams);
             }
         });
+
+        //update data.json with new page info
+        const strDataFile = path.resolve('./public/data.json');
+        const strData = fs.readFileSync(strDataFile, 'utf8');
+        const objData = JSON.parse(strData);
+        const strId = uuidv4();
+        objData.pages.push({
+            id: strId,
+            name: objParams.name,
+            template: objParams.template,
+            description: objParams.description,
+            glb: file.name,
+            thumbnail: null,
+            date: new Date().toISOString(),
+        });
+        fs.writeFileSync(strDataFile, JSON.stringify(objData, null, 4));
     return new Response(strFilename);
 }
 

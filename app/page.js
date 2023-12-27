@@ -17,19 +17,35 @@ const onUpload = (info) => {
 }
 
 
+
 export default function Home() {
     const [pages, setPages] = useState([]);
-    const [showModal, setModal] = useState(false);
-    const [objFormFields, setFormFields] = useState({});
+    const [modalView, setModalView] = useState('');
+    const [currentPage, setCurrentPage] = useState('');
     const [objForm] = Form.useForm();
     const getPages = () => {
-        fetch('/api/page')
+        fetch('data.json')
             .then(response => response.json())
-            .then(data => setPages(data));
+            .then(data => setPages(data.pages));
     };
     const onOk = () => {
-        setModal(false);
+        setModalView('');
+        setCurrentPage('')
         getPages();
+    };
+    const onDelete = () => {
+        fetch('api/page', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({page:currentPage}),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            onOk();
+        });
     };
     const tabPage = (
         <>
@@ -41,17 +57,24 @@ export default function Home() {
                         <h3>My Web3D Assets</h3>
                     </Col>
                     <Col span={12} style={{textAlign:'right'}}>
-                            <Button onClick={() => setModal(true)}>Upload New Model + Create Page</Button> 
+                            <Button onClick={() => setModalView('new')}>Upload New Model + Create Page</Button> 
                     </Col>
                 </Row>}
                 grid={{ gutter: 16, column: 4 }}
                 dataSource={pages}
-                renderItem={(file) => (
+                renderItem={(objPage) => (
                 <List.Item>
-                    <Card title={file}>
+                    <Card title={objPage.name}>
+                        { objPage.thumbnail && 
+                            <img alt={objPage.thumbnail} src={`thumbnails/${objPage.thumbnail}`} style={{width:'100%'}} />
+                        }
+                        <b>Template:</b> {objPage.template}<br />
+                        <b>Model:</b> {objPage.glb}<br />
+                        <b>Description:</b> {objPage.description}<br />
                         <Space>
-                            <a href={`r3f_${file}`}><LinkOutlined /></a>
-                            <FileImageOutlined />
+                            <a href={`r3f_${objPage.name}`}><LinkOutlined /></a>
+                            <FileImageOutlined onClick={() => {setCurrentPage(objPage.id); setModalView('thumbnail')}} />
+                            <DeleteOutlined onClick={() => {setCurrentPage(objPage.id); setModalView('delete')}} />
                         </Space>
                     </Card>
                 </List.Item>
@@ -59,9 +82,9 @@ export default function Home() {
             </List>
             <Modal
                 title="Create New Page"
-                onCancel={() => setModal(false)}
+                onCancel={onOk}
                 onOk={onOk}
-                open={showModal}>
+                open={modalView==='new'}>
                 <Form
                     form={objForm}
                     initialValues={{
@@ -123,6 +146,31 @@ export default function Home() {
                     <Button type="primary" icon={<UploadOutlined />}>Choose a .gltf or .glb File</Button>
                 </Upload>
             </Modal>
+            <Modal
+                title="Add Thumbnail"
+                onCancel={onOk}
+                onOk={onOk}
+                open={modalView==='thumbnail'}>
+                    <Upload
+                        onChange={onUpload}
+                        data={{page:currentPage}}
+                        action='api/thumbnail'
+                        multiple={false}
+                        maxCount={1}
+                        name='thumbnail'
+                    >
+                        <Button icon={<UploadOutlined />}>Choose a .jpg or .png File</Button>
+                    </Upload>
+            </Modal>
+            <Modal
+                title="Delete Page and Files"
+                onCancel={onOk}
+                onOk={onOk}
+                open={modalView==='delete'}>
+                    Are you sure you want to Delete this page and all files associated with it?
+                    
+                    <Button icon={<DeleteOutlined />} onClick={onDelete} >Delete Page, Scene, Model, Thumbnail</Button>
+            </Modal>
             </>);
 
     const tabHelp = (
@@ -132,6 +180,9 @@ export default function Home() {
         </div>
         <h2>References</h2>
         <ul>
+            <li>< a href="https://github.com/SuddenDevelopment/web3d" target="_blank">Github Repo</a>: 
+                The repo for this project
+            </li>
             <li>< a href="https://nodejs.org/en" target="_blank">Node.js</a>: 
                 Node.js is what the server side components and everything for building is based on. It is a server side javascript runtime.
             </li>
@@ -143,6 +194,9 @@ export default function Home() {
             </li>
             <li>< a href="https://react.dev/" target="_blank">React:</a>
                 React is a javascript library for building user interfaces. It is the foundation of all the 2D stuff here. It is also the foundation for React 3 Fiber.
+            </li>
+            <li>< a href="https://ant.design/components/overview/" target="_blank">AntD:</a>
+                Ant Design is a library of React components. It is used for the 2D UI components.
             </li>
             <li>< a href="https://github.com/pmndrs/react-three-fiber" target="_blank">React 3 Fiber AKA R3F:</a>
                 R3F is a library for using Three.js with React. It makes three.js accessible and composable.
