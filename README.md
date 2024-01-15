@@ -1,3 +1,5 @@
+[https://www.youtube.com/watch?v=1Qd9VVbEoZ8]
+
 Features
 - drag and drop create new 3d scenes with options / templates
   - focus object
@@ -16,6 +18,14 @@ Features
 
 notes:
 - sometimes you need to restart the dev server to get the latest changes
+
+Changelog:
+
+15 Jan 2024
+- switched default demo to xwing
+- bumped versions of dependancies
+- allow css to pass through to canvas in setup component
+- funcionsStash.js -> functions.js
 
 ==============
 

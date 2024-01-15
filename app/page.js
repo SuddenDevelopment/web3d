@@ -181,7 +181,7 @@ export default function Home() {
             </>);
 
     const tabHelp = (
-        <>
+        <div style={{margin:'20px', fontSize:"20px"}}>
         <div>
             This is a compilation of projects and efforts. This is just to make sense of it for beginners. When you find the limitations of what is here you will want some of the following links.
         </div>
@@ -223,7 +223,7 @@ export default function Home() {
         </ul>
         <div>
             <h2>What do we next?</h2>
-            Come to the Discord and let me know. Here is what I have in mind
+            Come to the <a href="https://discord.gg/BGzG5Vrkj9">Discord</a> and let me know. Here is what I have in mind
         <ul>
             <li>A Scene Editor like <a href="https://triplex.dev/">triplex.dev</a></li>
             <li>AN Animation tool like <a href="https://www.theatrejs.com/">theater.js</a></li>
@@ -236,9 +236,10 @@ export default function Home() {
             <ul>
                 <li><a href="https://blendermarket.com/products/simplebake---simple-pbr-and-other-baking-in-blender-2?ref=963">SimpleBake: help bake textures for materials</a></li>
                 <li><a href="https://blendermarket.com/products/kit-ops-pro-asset--kitbashing-addon?ref=963">KitOps: general purpose foundational workflow helper</a></li>
+                <li><a href="https://blendermarket.com/creators/anthony-aragues">My Other Blender Addons</a></li>
             </ul>
         </div>
-        </>
+        </div>
     );
     
     const arrTabs = [

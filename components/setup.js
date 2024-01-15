@@ -11,11 +11,12 @@ export function Setup({
     ambientLight = 1,
     shadows = false,
     toneMappingExposure = 0.1,
+    css = {'backgroundColor':'#000'},
     ...props
 }) {
 
     return (
-        <Canvas shadows gl={{ toneMappingExposure }} >
+        <Canvas shadows gl={{ toneMappingExposure }} style={css}>
             { orbitControls &&
                 <OrbitControls />
             }

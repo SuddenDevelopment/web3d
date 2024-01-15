@@ -9,20 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/drei": "^9.88.17",
-    "@react-three/fiber": "^8.15.11",
+    "@react-three/drei": "^9.92.7",
+    "@react-three/fiber": "^8.15.12",
     "@react-three/gltfjsx": "^4.3.4",
-    "antd": "^5.11.4",
+    "antd": "^5.12.6",
     "formidable": "^3.5.1",
-    "gltfjsx": "^6.2.15",
-    "next": "14.0.3",
+    "gltfjsx": "^6.2.16",
+    "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "three-pathfinding": "^1.2.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
     "babel-plugin-transform-imports": "^2.0.0",
     "eslint": "^8",
-    "eslint-config-next": "14.0.3"
+    "eslint-config-next": "14.0.4"
   }
 }

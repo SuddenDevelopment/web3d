@@ -8,9 +8,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
  return (
     <ConfigProvider
-        theme={{
-          algorithm: theme.darkAlgorithm,
-        }}
+
       >
       <html lang="en">
         <body>

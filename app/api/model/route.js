@@ -40,7 +40,7 @@ const createPage = function(strModelPath,strPagePath, objOptions) {
     const strModelFile = fs.readFileSync(path.resolve('./models/', strModelFilename+'.js'), 'utf8');
     let strNewModelFile = strModelFile.replaceAll(`('/r3f_`, `('models/r3f_`);
     //set camera default to true if in options, can only match the first one it finds
-    if(objOptions.camera === true) {
+    if(objOptions.camera === 'true') {
         strNewModelFile = strNewModelFile.replace(`Camera makeDefault={false}`, `Camera makeDefault={true}`);
     }
     fs.writeFileSync(path.resolve('./models/', strModelFilename+'.js'), strNewModelFile);
@@ -78,7 +78,7 @@ export async function POST(req) {
         strCommand += ' -T';
     }
     
-    //console.log(strCommand);
+    console.log(strCommand);
         exec(strCommand, {cwd: path.resolve('public/models') },(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);

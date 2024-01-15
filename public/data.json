@@ -1,12 +1,12 @@
 {
     "pages": [
         {
-            "id": "9e216384-ab7d-4034-a5a6-15f02d1002b5",
-            "name": "test",
-            "template": "stage",
-            "glb": "untitled.glb",
-            "thumbnail": "r3f_test.png",
-            "date": "2023-12-27T02:58:05.556Z"
+            "id": "c93184f9-7901-4289-8725-f57fdd63231c",
+            "name": "xwing2",
+            "template": "scene",
+            "glb": "x-wing.glb",
+            "thumbnail": "r3f_xwing2.png",
+            "date": "2024-01-02T01:28:41.732Z"
         }
     ]
 }

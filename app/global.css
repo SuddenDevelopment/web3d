@@ -14,12 +14,8 @@ html, body, #root, #__next {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    overflow: hidden;
   }
   body{
-    position: fixed;
-    overflow: hidden;
-    overscroll-behavior-y: none;
     font-family: helvetica neue, helvetica, arial, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
