@@ -1,4 +1,4 @@
-import { ConfigProvider, theme } from 'antd';
+import { ConfigProvider } from 'antd';
 import './global.css'
 export const metadata = {
   title: 'Web3D',
@@ -7,9 +7,7 @@ export const metadata = {
 /* https://ant.design/docs/react/customize-theme */
 export default function RootLayout({ children }) {
  return (
-    <ConfigProvider
-
-      >
+    <ConfigProvider>
       <html lang="en">
         <body>
           {children}

@@ -1,5 +1,7 @@
 import { pipeline } from 'stream';
 import { promisify } from 'util';
+//import { load } from '@loaders.gl/core';
+//import { GLTFLoader } from '@loaders.gl/gltf';
 import fs from 'fs';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,8 +17,15 @@ const replaceTokens = function(strContent, objTokens) {
     return strNewContent;
 }
 
+const loadModel = async function(strPath) {
+    console.log('READING',strPath);
+    const data = fs.readFileSync(strPath);
+    //const gltfData = await load(data, GLTFLoader);
+    //console.log(gltfData);
+  }
+
 // create the basic scene and point to the new model
-const createPage = function(strModelPath,strPagePath, objOptions) {
+const createPage = async function(strModelPath,strPagePath, objOptions) {
     let strTemplateFile = 'scene.js';
     if (objOptions.template === 'stage') {
         strTemplateFile = 'stage.js';
@@ -34,6 +43,11 @@ const createPage = function(strModelPath,strPagePath, objOptions) {
         camera: objOptions.camera ?? false,
         instances: objOptions.instances ?? false,
     });
+    //load the GTLF/GLB file even if it's compressed with draco
+
+    // add mesh events if the actions are named meshName_event_action_details
+    // e.g. leftMesh_click_play_1_1000 playActions = function(actions, arrPlayActions, strBehavior = 'play', intRepeat=0, intDelay = 1000)
+
     fs.writeFileSync(strPagePath, strContent);
 
     //update the path in the model file
@@ -44,6 +58,11 @@ const createPage = function(strModelPath,strPagePath, objOptions) {
         strNewModelFile = strNewModelFile.replace(`Camera makeDefault={false}`, `Camera makeDefault={true}`);
     }
     fs.writeFileSync(path.resolve('./models/', strModelFilename+'.js'), strNewModelFile);
+
+    // Load the GLTF or GLB file and read the action names
+    //const gltfData = await load(strModelPath, GLTFLoader);
+    //const actionNames = gltfData.animations.map(animation => animation.name);
+    //console.log('Action names:', actionNames);
 };
 
 export async function POST(req) {
@@ -77,8 +96,7 @@ export async function POST(req) {
     if(objParams.transform === 'true') {
         strCommand += ' -T';
     }
-    
-    console.log(strCommand);
+    //console.log(strCommand);
         exec(strCommand, {cwd: path.resolve('public/models') },(error, stdout, stderr) => {
             if (error) {
                 console.log(`error: ${error.message}`);
@@ -92,10 +110,10 @@ export async function POST(req) {
             if (fs.existsSync(strDestinationFile)) {
                 //console.log(`found it`);
                 objParams.glb = fileName;
+                //const gltf = loadModel(strDestinationFile);
                 createPage(strFilename, path.join(path.resolve('./pages/'), strFilename), objParams);
             }
         });
-
         //update data.json with new page info
         const strDataFile = path.resolve('./public/data.json');
         const strData = fs.readFileSync(strDataFile, 'utf8');

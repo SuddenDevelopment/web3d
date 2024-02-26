@@ -34,6 +34,10 @@ Getting Started
 2. npm install
 3. npm run dev
 
+Docker
+1. docker build -t web3d .
+2. docker run -d -p 3000:3000 web3d
+
 Publishing
 1. Create a github account and save changes to a new repo
 2. Create a vercel account and link to github repo

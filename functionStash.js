@@ -1,3 +1,5 @@
+//this is just intended as a notepad of sorts for examples not turned into reusable functions
+
 const highlight = function(mesh){
     //flash the mesh red
     const oldMaterial = mesh.material;

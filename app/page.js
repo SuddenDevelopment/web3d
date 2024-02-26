@@ -2,6 +2,7 @@
 import { Button, Card, Checkbox, Col, Form, Input, InputNumber, List, message, Modal, Upload, Row, Select, Space, Tabs} from 'antd';
 import { DeleteOutlined, FileImageOutlined, LinkOutlined, UploadOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 
 
@@ -69,7 +70,9 @@ export default function Home() {
                 <List.Item>
                     <Card title={objPage.name}>
                         { objPage.thumbnail && 
-                            <img alt={objPage.thumbnail} src={`thumbnails/${objPage.thumbnail}`} style={{width:'100%'}} />
+                            <a href={`r3f_${objPage.name}`}>
+                                <Image alt={objPage.thumbnail} src={`/thumbnails/${objPage.thumbnail}`} width={400} height={300} />
+                            </a>
                         }
                         <b>Template:</b> {objPage.template}<br />
                         <b>Model:</b> {objPage.glb}<br />

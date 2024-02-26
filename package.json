@@ -12,12 +12,16 @@
     "@react-three/drei": "^9.92.7",
     "@react-three/fiber": "^8.15.12",
     "@react-three/gltfjsx": "^4.3.4",
-    "antd": "^5.12.6",
+    "antd": "^5.14.2",
+    "fastnoise-lite": "^1.1.0",
     "formidable": "^3.5.1",
     "gltfjsx": "^6.2.16",
-    "next": "14.0.4",
+    "maath": "^0.10.7",
+    "next": "^14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-three-generator": "^1.2.4",
+    "three-custom-shader-material": "^5.4.0",
     "three-pathfinding": "^1.2.0"
   },
   "devDependencies": {
