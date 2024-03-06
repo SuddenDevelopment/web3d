@@ -10,7 +10,7 @@ export default function R3fScene() {
         <>
         <Setup 
           orbitControls={true}
-          ambientLight={10}
+          ambientLight={20}
           shadows={false}
           toneMappingExposure={0.1}
           >

@@ -14,11 +14,11 @@ RUN npm ci
 # Copy all files
 COPY . .
 
-# Build the project
-RUN npm run build
+# run the project
+#RUN npm run dev
 
 # Expose the listening port
 EXPOSE 3000
 
 # Run npm start to start
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
