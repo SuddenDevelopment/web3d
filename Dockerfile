@@ -15,10 +15,10 @@ RUN npm ci
 COPY . .
 
 # run the project
-#RUN npm run dev
+RUN npm build
 
 # Expose the listening port
 EXPOSE 3000
 
 # Run npm start to start
-CMD ["npm", "run", "dev"]
+CMD ["npm", "start"]

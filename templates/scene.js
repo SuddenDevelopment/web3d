@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Setup} from "../components/setup.js";
 import {Model} from "../models/{model}.js";
 import '../app/global.css';
-import { Toolbox } from "@/components/toolbox.js";
 
 export default function R3fScene() {
     const [objData, setObjData] = useState({
@@ -19,9 +18,6 @@ export default function R3fScene() {
           >
             <Model setSceneData={setObjData} />
         </Setup>
-        { process.env.NODE_ENV === 'development' &&
-            <Toolbox sceneData={objData} />
-        }
         </>
     );
 }
