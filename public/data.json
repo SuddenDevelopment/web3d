@@ -7,22 +7,6 @@
             "glb": "x-wing.glb",
             "thumbnail": "r3f_xwing2.png",
             "date": "2024-01-02T01:28:41.732Z"
-        },
-        {
-            "id": "33d2bef1-6346-4eed-b5e6-c61745abbcb4",
-            "name": "trees",
-            "template": "scene",
-            "glb": "Cartoon LowPoly Trees Pack.glb",
-            "thumbnail": null,
-            "date": "2024-03-11T03:01:08.958Z"
-        },
-        {
-            "id": "3f310e17-932c-4cf3-84d3-b0c667c32ee5",
-            "name": "cylinder",
-            "template": "stage",
-            "glb": "untitled.glb",
-            "thumbnail": null,
-            "date": "2024-03-12T02:29:28.652Z"
         }
     ]
 }
