@@ -7,6 +7,14 @@
             "glb": "x-wing.glb",
             "thumbnail": "r3f_xwing2.png",
             "date": "2024-01-02T01:28:41.732Z"
+        },
+        {
+            "id": "d1921bc4-476f-43b2-a767-9e45bd27c13a",
+            "name": "trees",
+            "template": "stage",
+            "glb": "r3f_trees.glb",
+            "thumbnail": null,
+            "date": "2024-04-04T00:08:59.400Z"
         }
     ]
 }
